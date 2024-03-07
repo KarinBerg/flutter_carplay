@@ -9,6 +9,7 @@ import 'package:flutter_carplay/models/grid/grid_button.dart';
 import 'package:flutter_carplay/models/grid/grid_template.dart';
 import 'package:flutter_carplay/models/list/list_template.dart';
 import 'package:flutter_carplay/models/information/information_template.dart';
+import 'package:flutter_carplay/models/map/map_template.dart';
 import 'package:flutter_carplay/models/poi/poi.dart';
 import 'package:flutter_carplay/models/poi/poi_template.dart';
 import 'package:flutter_carplay/models/tabbar/tabbar_template.dart';
@@ -92,7 +93,8 @@ class FlutterCarPlayController {
         template.runtimeType == CPGridTemplate ||
         template.runtimeType == CPInformationTemplate ||
         template.runtimeType == CPPointOfInterestTemplate ||
-        template.runtimeType == CPListTemplate) {
+        template.runtimeType == CPListTemplate ||
+        template.runtimeType == CPMapTemplate) {
       templateHistory.add(template);
     } else {
       throw TypeError();
