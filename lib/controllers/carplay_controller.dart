@@ -24,10 +24,10 @@ class FlutterCarPlayController {
   static final EventChannel _eventChannel =
       EventChannel(_carplayHelper.makeFCPChannelId(event: "/event"));
 
-  /// [CPTabBarTemplate], [CPGridTemplate], [CPListTemplate], [CPIInformationTemplate], [CPPointOfInterestTemplate] in a List
+  /// [CPTabBarTemplate], [CPGridTemplate], [CPListTemplate], [CPIInformationTemplate], [CPPointOfInterestTemplate], [CPMapTemplate] in a List
   static List<dynamic> templateHistory = [];
 
-  /// [CPTabBarTemplate], [CPGridTemplate], [CPListTemplate], [CPIInformationTemplate], [CPPointOfInterestTemplate]
+  /// [CPTabBarTemplate], [CPGridTemplate], [CPListTemplate], [CPIInformationTemplate], [CPPointOfInterestTemplate], [CPMapTemplate]
   static dynamic currentRootTemplate;
 
   /// [CPAlertTemplate], [CPActionSheetTemplate]
