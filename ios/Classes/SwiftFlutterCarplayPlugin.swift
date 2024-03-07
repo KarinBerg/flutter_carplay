@@ -16,7 +16,7 @@ public class SwiftFlutterCarplayPlugin: NSObject, FlutterPlugin {
   private static var _rootTemplate: CPTemplate?
   public static var animated: Bool = false
   private var objcPresentTemplate: FCPPresentTemplate?
-  
+
   public static var rootTemplate: CPTemplate? {
     get {
       return _rootTemplate
@@ -25,14 +25,14 @@ public class SwiftFlutterCarplayPlugin: NSObject, FlutterPlugin {
       _rootTemplate = tabBarTemplate
     }
   }
-  
+
   public static func register(with registrar: FlutterPluginRegistrar) {
     let channel = FlutterMethodChannel(name: makeFCPChannelId(event: ""),
                                        binaryMessenger: registrar.messenger())
     let instance = SwiftFlutterCarplayPlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
     self.registrar = registrar
-    
+
     self.streamHandler = FCPStreamHandlerPlugin(registrar: registrar)
   }
 
@@ -70,6 +70,10 @@ public class SwiftFlutterCarplayPlugin: NSObject, FlutterPlugin {
       case String(describing: FCPListTemplate.self):
         rootTemplate = FCPListTemplate(obj: args["rootTemplate"] as! [String : Any], templateType: FCPListTemplateTypes.DEFAULT)
         SwiftFlutterCarplayPlugin.rootTemplate = (rootTemplate as! FCPListTemplate).get
+        break
+      case String(describing: FCPMapTemplate.self):
+        rootTemplate = FCPMapTemplate(obj: args["rootTemplate"] as! [String : Any])
+        SwiftFlutterCarplayPlugin.rootTemplate = (rootTemplate as! FCPMapTemplate).get
         break
       default:
         result(false)
@@ -186,7 +190,7 @@ public class SwiftFlutterCarplayPlugin: NSObject, FlutterPlugin {
       case String(describing: FCPInformationTemplate.self):
         pushTemplate = FCPInformationTemplate(obj: args["template"] as! [String : Any]).get
         break
-    
+
       case String(describing: FCPListTemplate.self):
         pushTemplate = FCPListTemplate(obj: args["template"] as! [String : Any], templateType: FCPListTemplateTypes.DEFAULT).get
         break
@@ -211,18 +215,18 @@ public class SwiftFlutterCarplayPlugin: NSObject, FlutterPlugin {
       break
     }
   }
-  
+
   static func createEventChannel(event: String?) -> FlutterEventChannel {
     let eventChannel = FlutterEventChannel(name: makeFCPChannelId(event: event),
                                            binaryMessenger: SwiftFlutterCarplayPlugin.registrar!.messenger())
     return eventChannel
   }
-  
+
   static func onCarplayConnectionChange(status: String) {
     FCPStreamHandlerPlugin.sendEvent(type: FCPChannelTypes.onCarplayConnectionChange,
                                      data: ["status": status])
   }
-  
+
   static func findItem(elementId: String, actionWhenFound: (_ item: FCPListItem) -> Void) {
     let objcRootTemplateType = String(describing: SwiftFlutterCarplayPlugin.objcRootTemplate).match(#"(.*flutter_carplay\.(.*)\))"#)[0][2]
     var templates: [FCPListTemplate] = []

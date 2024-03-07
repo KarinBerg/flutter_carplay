@@ -6,6 +6,7 @@ import 'package:flutter_carplay/helpers/enum_utils.dart';
 import 'package:flutter_carplay/models/alert/alert_template.dart';
 import 'package:flutter_carplay/models/grid/grid_template.dart';
 import 'package:flutter_carplay/models/information/information_template.dart';
+import 'package:flutter_carplay/models/map/map_template.dart';
 import 'package:flutter_carplay/models/poi/poi_template.dart';
 import 'package:flutter_carplay/models/tabbar/tabbar_template.dart';
 import 'package:flutter_carplay/constants/private_constants.dart';
@@ -137,7 +138,7 @@ class FlutterCarplay {
   ///
   /// - rootTemplate is a template to use as the root of a new navigation hierarchy. If one exists,
   /// it will replace the current rootTemplate. **Must be one of the type:**
-  /// [CPTabBarTemplate], [CPGridTemplate], [CPListTemplate] If not, it will throw an [TypeError]
+  /// [CPTabBarTemplate], [CPGridTemplate], [CPListTemplate], [CPInformationTemplate], [CPPointOfInterestTemplate], [CPMapTemplate] If not, it will throw an [TypeError]
   ///
   /// - If animated is true, CarPlay animates the presentation of the template, but will be ignored
   /// this flag when there isn’t an existing navigation hierarchy to replace.
@@ -151,7 +152,8 @@ class FlutterCarplay {
         rootTemplate.runtimeType == CPGridTemplate ||
         rootTemplate.runtimeType == CPListTemplate ||
         rootTemplate.runtimeType == CPInformationTemplate ||
-        rootTemplate.runtimeType == CPPointOfInterestTemplate) {
+        rootTemplate.runtimeType == CPPointOfInterestTemplate ||
+        rootTemplate.runtimeType == CPMapTemplate) {
       _carPlayController.methodChannel
           .invokeMethod('setRootTemplate', <String, dynamic>{
         'rootTemplate': rootTemplate.toJson(),
