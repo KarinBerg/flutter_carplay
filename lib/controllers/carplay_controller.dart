@@ -188,6 +188,23 @@ class FlutterCarPlayController {
       }
     }
   }
+
+  void processFCPMapButtonPressed(String elementId) {
+    CPMapButton? mapButton;
+    l1:
+    for (var t in templateHistory) {
+      if (t.runtimeType.toString() == "CPMapTemplate") {
+        for (var b in t.mapButtons) {
+          if (b.uniqueId == elementId) {
+            mapButton = b;
+            break l1;
+          }
+        }
+      }
+    }
+    if (mapButton != null) mapButton.onPress();
   }
+
+}
 
 

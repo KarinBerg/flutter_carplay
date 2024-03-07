@@ -25,6 +25,7 @@ enum FCPChannelTypes {
   static let pushTemplate = "pushTemplate"
   static let closePresent = "closePresent"
   static let onGridButtonPressed = "onGridButtonPressed"
+  static let onMapButtonPressed = "onMapButtonPressed"
   static let setActionSheet = "setActionSheet"
   static let onBarButtonPressed = "onBarButtonPressed"
   static let onTextButtonPressed = "onTextButtonPressed"
